@@ -6,12 +6,13 @@ console.log(galleryItems);
 const gridCardsContainer = document.querySelector(".gallery");
 const gridCards = createGridCardsGallery(galleryItems);
 
-gridCardsContainer.insertAdjacentHTML('afterbegin', gridCards);
+gridCardsContainer.insertAdjacentHTML("afterbegin", gridCards);
 
-gridCardsContainer.addEventListener('click', gridCardsContainerClick);
+gridCardsContainer.addEventListener("click", gridCardsContainerClick);
 
 function createGridCardsGallery(galleryItems) {
-  return galleryItems.map(({ preview, original, description }) => {
+  return galleryItems
+    .map(({ preview, original, description }) => {
       return `<div class="gallery__item">
   <a class="gallery__link" href="${original}">
     <img
@@ -22,14 +23,20 @@ function createGridCardsGallery(galleryItems) {
     />
   </a>
 </div>`;
-  })
-    .join('');
-};
+    })
+    .join("");
+}
 
 function gridCardsContainerClick(event) {
   event.preventDefault();
-    if (!event.target.classList.contains('gallery__link')) {
-      return;
-    }
-    console.log(event.target.dataset.source);
+  if (!event.target.classList.contains("gallery__link")) {
+    return;
+  }
+  console.log(event.target.dataset.source);
 }
+
+const instance = basicLightbox.create(`
+    <img src="assets/images/image.png" width="800" height="600">
+`);
+
+instance.show();
