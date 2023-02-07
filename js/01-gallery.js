@@ -7,7 +7,6 @@ const gridCardsContainer = document.querySelector(".gallery");
 const gridCards = createGridCardsGallery(galleryItems);
 
 gridCardsContainer.insertAdjacentHTML("afterbegin", gridCards);
-
 gridCardsContainer.addEventListener("click", gridCardsContainerClick);
 
 function createGridCardsGallery(galleryItems) {
@@ -29,7 +28,8 @@ function createGridCardsGallery(galleryItems) {
 
 function gridCardsContainerClick(event) {
   event.preventDefault();
-  if (!event.target.classList.contains("img")) {
+  if (!event.target.classList.contains("gallery__image")) {
+    console.log(event.target.dataset.source);
     return;
   }
   console.log(event.target.dataset.source);
@@ -38,7 +38,11 @@ function gridCardsContainerClick(event) {
     <img src="${event.target.dataset.source}" width="800" height="600">
 `);
 
-instance.show();
+  instance.show();
+
+  gridCardsContainer.addEventListener("keydown", (event) => {
+    if (event.code === "Escape") {
+      instance.close();
+    }
+  });
 }
-
-
