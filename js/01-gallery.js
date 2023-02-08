@@ -29,20 +29,34 @@ function createGridCardsGallery(galleryItems) {
 function gridCardsContainerClick(event) {
   event.preventDefault();
   if (!event.target.classList.contains("gallery__image")) {
-    console.log(event.target.dataset.source);
     return;
   }
-  console.log(event.target.dataset.source);
 
-  const instance = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="800" height="600">
-`);
-
-  instance.show();
-
-  gridCardsContainer.addEventListener("keydown", (event) => {
+  const closeModal = (event) => {
     if (event.code === "Escape") {
       instance.close();
     }
-  });
+  };
+
+  const instance = basicLightbox.create(
+    `
+  <img src="${event.target.dataset.source}" width="800" height="600">`,
+    {
+      onShow: (instance) => {
+        window.addEventListener("keydown", closeModal);
+      },
+
+      onClose: (instance) => {
+        window.removeEventListener("keydown", closeModal);
+      },
+    }
+  );
+
+  instance.show();
 }
+
+// gridCardsContainer.addEventListener("keydown", (event) => {
+//   if (event.code === "Escape") {
+//     instance.close();
+//   }
+// });

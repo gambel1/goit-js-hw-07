@@ -7,7 +7,7 @@ const gridCardsContainer = document.querySelector(".gallery");
 const gridCards = createGridCardsGallery(galleryItems);
 
 gridCardsContainer.insertAdjacentHTML("afterbegin", gridCards);
-gridCardsContainer.addEventListener("click", gridCardsContainerClick);
+// gridCardsContainer.addEventListener("click", gridCardsContainerClick);
 
 function createGridCardsGallery(galleryItems) {
   return galleryItems
@@ -25,8 +25,8 @@ function createGridCardsGallery(galleryItems) {
     .join("");
 }
 
-function gridCardsContainerClick(event) {
-  event.preventDefault();
+// function gridCardsContainerClick(event) {
+//   event.preventDefault();
   const lightbox = new SimpleLightbox(".gallery__link", {
     captionsData: "alt",
     captionDelay: 250,
@@ -34,4 +34,4 @@ function gridCardsContainerClick(event) {
   // if (!event.target.classList.contains("gallery__image")) {
   //   return;
   // }
-}
+
